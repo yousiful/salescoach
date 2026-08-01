@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Sales Coach - Testing API</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8fafc;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #1e40af;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f1f5f9;
+            border-radius: 8px;
+        }
+        .endpoint {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        .method {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .get { background: #10b981; color: white; }
+        .post { background: #3b82f6; color: white; }
+        .put { background: #f59e0b; color: white; }
+        .delete { background: #ef4444; color: white; }
+        .response {
+            background: #ecfdf5;
+            border: 1px solid #10b981;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        .test-button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .test-button:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Sales Coach - Testing API</h1>
+        <p class="subtitle">API endpoints for AI testing models to interact with the application</p>
+
+        <div class="section">
+            <h2>Testing Endpoints</h2>
+            <p>These endpoints allow AI testing models to simulate user interactions and validate app behavior.</p>
+
+            <h3>Get Current State</h3>
+            <div class="endpoint">
+                <span class="method get">GET</span> /api/test/state
+            </div>
+            <p>Returns the current user progress and app state for analysis.</p>
+            <div class="response">
+                <strong>Response:</strong>
+                <pre>{
+  "userProgress": {
+    "usage_minutes": 15,
+    "completedModules": ["closing-fundamentals"],
+    "rolePlaySessions": 3,
+    "averageScore": 85,
+    "subscription_status": "trial"
+  },
+  "timestamp": "2024-01-01T12:00:00Z"
+}</pre>
+            </div>
+
+            <h3>Simulate Usage</h3>
+            <div class="endpoint">
+                <span class="method post">POST</span> /api/test/simulate-usage
+            </div>
+            <p>Simulates user time spent in the application.</p>
+            <div class="response">
+                <strong>Body:</strong>
+                <pre>{ "minutes": 15 }</pre>
+            </div>
+
+            <h3>Add Role-Play Session</h3>
+            <div class="endpoint">
+                <span class="method post">POST</span> /api/test/add-roleplay
+            </div>
+            <p>Simulates completing a role-play session with a score.</p>
+            <div class="response">
+                <strong>Body:</strong>
+                <pre>{ "score": 85 }</pre>
+            </div>
+
+            <h3>Complete Module</h3>
+            <div class="endpoint">
+                <span class="method post">POST</span> /api/test/complete-module
+            </div>
+            <p>Simulates completing a training module.</p>
+            <div class="response">
+                <strong>Body:</strong>
+                <pre>{ "moduleId": "closing-fundamentals" }</pre>
+            </div>
+
+            <h3>Reset Progress</h3>
+            <div class="endpoint">
+                <span class="method post">POST</span> /api/test/reset
+            </div>
+            <p>Resets all user progress to initial state.</p>
+
+            <h3>Generate Test Data</h3>
+            <div class="endpoint">
+                <span class="method post">POST</span> /api/test/generate-data
+            </div>
+            <p>Generates realistic test data for various user scenarios.</p>
+            <div class="response">
+                <strong>Body:</strong>
+                <pre>{ "scenario": "returning_user" }</pre>
+                <strong>Scenarios:</strong> new_user, returning_user, premium_user
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Validation Endpoints</h2>
+            
+            <h3>Validate Subscription Flow</h3>
+            <div class="endpoint">
+                <span class="method get">GET</span> /api/test/validate-subscription
+            </div>
+            <p>Tests if subscription modal appears when usage limit is reached.</p>
+
+            <h3>Validate Training Progression</h3>
+            <div class="endpoint">
+                <span class="method get">GET</span> /api/test/validate-training
+            </div>
+            <p>Tests if training modules unlock in proper sequence.</p>
+        </div>
+
+        <div class="section">
+            <h2>JavaScript Testing Interface</h2>
+            <p>For direct browser testing, these functions are available in the console:</p>
+            
+            <div class="endpoint">
+// Access the testing helper
+const helper = window.AITestingHelper.getInstance();
+
+// Simulate different user journeys
+await helper.simulateUserJourney('new_user');
+await helper.simulateUserJourney('returning_user');
+await helper.simulateUserJourney('premium_user');
+
+// Generate test data
+const testData = helper.generateTestData('moderate');
+
+// Validate app state
+const isValid = helper.validateAppState({
+  usage_minutes: 15,
+  subscription_status: 'trial'
+});
+
+// Test specific flows
+const subscriptionWorks = await helper.testSubscriptionFlow();
+const trainingWorks = await helper.testTrainingProgression();
+
+// Export state for AI analysis
+const currentState = helper.exportStateForAI();
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Quick Test Actions</h2>
+            <p>Click these buttons to test different scenarios:</p>
+            
+            <button class="test-button" onclick="testNewUser()">Test New User</button>
+            <button class="test-button" onclick="testReturningUser()">Test Returning User</button>
+            <button class="test-button" onclick="testUsageLimit()">Test Usage Limit</button>
+            <button class="test-button" onclick="testSubscription()">Test Subscription Flow</button>
+            <button class="test-button" onclick="resetAll()">Reset All</button>
+        </div>
+
+        <div class="section">
+            <h2>Current State</h2>
+            <div id="currentState">
+                <p>Loading current state...</p>
+            </div>
+            <button class="test-button" onclick="refreshState()">Refresh State</button>
+        </div>
+    </div>
+
+    <script>
+        // Testing functions
+        async function testNewUser() {
+            if (window.AITestingHelper) {
+                const helper = window.AITestingHelper.getInstance();
+                await helper.simulateUserJourney('new_user');
+                refreshState();
+            }
+        }
+
+        async function testReturningUser() {
+            if (window.AITestingHelper) {
+                const helper = window.AITestingHelper.getInstance();
+                await helper.simulateUserJourney('returning_user');
+                refreshState();
+            }
+        }
+
+        async function testUsageLimit() {
+            if (window.appContext) {
+                window.appContext.simulateUsage(25);
+                refreshState();
+            }
+        }
+
+        async function testSubscription() {
+            if (window.AITestingHelper) {
+                const helper = window.AITestingHelper.getInstance();
+                const result = await helper.testSubscriptionFlow();
+                alert(`Subscription flow test: ${result ? 'PASSED' : 'FAILED'}`);
+                refreshState();
+            }
+        }
+
+        async function resetAll() {
+            if (window.appContext) {
+                await window.appContext.resetProgress();
+                refreshState();
+            }
+        }
+
+        function refreshState() {
+            const stateDiv = document.getElementById('currentState');
+            if (window.AITestingHelper) {
+                const helper = window.AITestingHelper.getInstance();
+                const state = helper.exportStateForAI();
+                stateDiv.innerHTML = `<pre>${JSON.stringify(state, null, 2)}</pre>`;
+            } else {
+                stateDiv.innerHTML = '<p>Testing interface not available. Please load the main application first.</p>';
+            }
+        }
+
+        // Auto-refresh state every 5 seconds
+        setInterval(refreshState, 5000);
+        
+        // Initial state load
+        setTimeout(refreshState, 1000);
+    </script>
+</body>
+</html>
