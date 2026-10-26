@@ -53,7 +53,7 @@ const initSupabase = () => {
   const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
   if (!supabaseUrl || !supabaseAnonKey) {
-    console.error('Supabase environment variables are missing');
+    console.warn('Supabase is not configured; progress will not be saved.');
     return null;
   }
 
@@ -384,7 +384,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     const fetchUserProgress = async () => {
       try {
         if (!supabase) {
-          throw new Error('Supabase client is not properly initialized');
+          // Not configured: keep the default local progress and stop here.
+          return;
         }
 
         // Check if we're in test mode (AI testing)
