@@ -1,0 +1,77 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3a8a;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e0f2fe;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <radialGradient id="snowflakeGradient">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e0f2fe;stop-opacity:0.8" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background Circle with Gradient -->
+  <circle cx="256" cy="256" r="240" fill="url(#bgGradient)" filter="url(#glow)"/>
+
+  <!-- Christmas Decorations - Snowflakes -->
+  <g opacity="0.9">
+    <!-- Snowflake top right -->
+    <path d="M 400 100 L 400 85 M 390 92.5 L 410 92.5 M 393 88 L 407 97 M 393 97 L 407 88"
+          stroke="#fff" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <circle cx="400" cy="92.5" r="2" fill="url(#snowflakeGradient)"/>
+
+    <!-- Snowflake top left -->
+    <path d="M 112 120 L 112 105 M 102 112.5 L 122 112.5 M 105 108 L 119 117 M 105 117 L 119 108"
+          stroke="#fff" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <circle cx="112" cy="112.5" r="2" fill="url(#snowflakeGradient)"/>
+
+    <!-- Snowflake bottom right -->
+    <path d="M 420 380 L 420 365 M 410 372.5 L 430 372.5 M 413 368 L 427 377 M 413 377 L 427 368"
+          stroke="#fff" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <circle cx="420" cy="372.5" r="2" fill="url(#snowflakeGradient)"/>
+  </g>
+
+  <!-- Christmas Stars -->
+  <g opacity="0.8">
+    <circle cx="140" cy="380" r="4" fill="#fbbf24"/>
+    <circle cx="90" cy="200" r="3" fill="#fbbf24"/>
+    <circle cx="390" cy="200" r="3" fill="#fbbf24"/>
+  </g>
+
+  <!-- Letter K with Modern Style -->
+  <g filter="url(#glow)">
+    <path d="M 160 340 L 160 172
+             M 160 256 L 320 172
+             M 160 256 L 340 340"
+          stroke="url(#textGradient)"
+          stroke-width="48"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          fill="none"/>
+  </g>
+
+  <!-- Holiday Accent - Small dots around K -->
+  <circle cx="150" cy="165" r="6" fill="#ef4444" opacity="0.9"/>
+  <circle cx="350" cy="165" r="6" fill="#10b981" opacity="0.9"/>
+  <circle cx="150" cy="347" r="6" fill="#10b981" opacity="0.9"/>
+  <circle cx="350" cy="347" r="6" fill="#ef4444" opacity="0.9"/>
+
+  <!-- Subtle sparkle effects -->
+  <g opacity="0.6">
+    <path d="M 256 50 L 256 60 M 251 55 L 261 55" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+    <path d="M 460 250 L 460 260 M 455 255 L 465 255" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+    <path d="M 52 250 L 52 260 M 47 255 L 57 255" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg>

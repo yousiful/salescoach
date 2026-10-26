@@ -1,15 +1,15 @@
-import { loadStripe } from '@stripe/stripe-js';
 import { useCallback } from 'react';
 import { STRIPE_PRODUCTS } from '../stripe-config';
 import { supabase } from '../lib/supabase';
 
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 export function useStripe() {
   const createCheckoutSession = useCallback(async (productId: keyof typeof STRIPE_PRODUCTS) => {
     try {
       const product = STRIPE_PRODUCTS[productId];
       if (!product) throw new Error('Invalid product');
+
+      if (!supabase) throw new Error('Checkout is not available right now. Please try again later.');
 
       const response = await supabase.functions.invoke('stripe-checkout', {
         body: {

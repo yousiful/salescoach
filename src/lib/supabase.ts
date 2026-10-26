@@ -3,15 +3,9 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.error('Required environment variables are missing:', {
-    url: !supabaseUrl ? 'VITE_SUPABASE_URL is missing' : 'OK',
-    key: !supabaseAnonKey ? 'VITE_SUPABASE_ANON_KEY is missing' : 'OK'
-  });
-  throw new Error('Supabase configuration is incomplete. Please check your environment variables.');
-}
-
-export const supabase = createClient(
+// Without these env vars the site still renders; only checkout and saved
+// progress are disabled. Set them in Netlify to turn those features on.
+export const supabase = supabaseUrl && supabaseAnonKey ? createClient(
   supabaseUrl,
   supabaseAnonKey,
   {
@@ -30,7 +24,7 @@ export const supabase = createClient(
       },
     },
   }
-);
+) : null;
 
 // Export a function to check if Supabase is properly initialized
 export const isSupabaseInitialized = () => {
