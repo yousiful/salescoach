@@ -188,7 +188,13 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  // Paid checkout needs Supabase (stripe-checkout edge function). Until it is
+  // configured, the tool stays fully free instead of walling users behind a
+  // checkout that cannot load.
+  const checkoutAvailable = Boolean(supabase);
+
   const isUsageLimitReached = () => {
+    if (!checkoutAvailable) return false;
     return (userProgress.usage_minutes || 0) >= 20; // 20 minutes limit
   };
 

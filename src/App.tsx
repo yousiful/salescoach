@@ -4,7 +4,6 @@ import { Toaster } from 'react-hot-toast';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import TrialBanner from './components/TrialBanner';
-import ActivityNotifications from './components/ActivityNotifications';
 import TestingPanel from './components/TestingPanel';
 import LevelUpAnimation from './components/gamification/LevelUpAnimation';
 import AchievementAnimation from './components/gamification/AchievementAnimation';
@@ -75,7 +74,6 @@ function App() {
                 <Route path="/checkout/cancel" element={<CheckoutCancel />} />
               </Routes>
             </main>
-            <ActivityNotifications />
             <Footer />
             <TestingPanel />
             <LevelUpAnimation />

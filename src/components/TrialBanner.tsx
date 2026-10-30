@@ -2,6 +2,11 @@ import React from 'react';
 import { Clock, X, AlertTriangle } from 'lucide-react';
 import { useAppContext } from '../contexts/AppContext';
 
+// No Supabase means no checkout, so there is no trial to count down.
+const isCheckoutConfigured = Boolean(
+  import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_ANON_KEY
+);
+
 const TrialBanner: React.FC = () => {
   const { 
     userProgress, 
@@ -14,7 +19,7 @@ const TrialBanner: React.FC = () => {
   
   const [isVisible, setIsVisible] = React.useState(true);
 
-  if (!isVisible || userProgress.subscription_status === 'active') {
+  if (!isVisible || !isCheckoutConfigured || userProgress.subscription_status === 'active') {
     return null;
   }
 
